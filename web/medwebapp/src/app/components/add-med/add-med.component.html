@@ -1,0 +1,41 @@
+<div class="add-med-container">
+  <h2>Add New Medicine</h2>
+  <form (ngSubmit)="onSubmit()" #medForm="ngForm">
+    <div class="form-group">
+      <label for="brand">Brand:</label>
+      <input type="text" id="brand" [(ngModel)]="med.brand" name="brand" required>
+    </div>
+
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input type="text" id="name" [(ngModel)]="med.name" name="name" required>
+    </div>
+
+    <div class="form-group">
+      <label for="notes">Notes:</label>
+      <textarea id="notes" [(ngModel)]="med.notes" name="notes"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="expiryDate">Expiry Date:</label>
+      <input type="date" id="expiryDate" [(ngModel)]="med.expiryDate" name="expiryDate">
+    </div>
+
+    <div class="form-group">
+      <label for="quantity">Quantity:</label>
+      <input type="number" id="quantity" [(ngModel)]="med.quantity" name="quantity" min="0">
+    </div>
+
+    <div class="form-group">
+      <label for="price">Price:</label>
+      <input type="number" id="price" [(ngModel)]="med.price" name="price" step="0.01" min="0">
+    </div>
+
+    <button type="submit" [disabled]="!medForm.form.valid">Add Medicine</button>
+  </form>
+  @if(message().length>0 )
+  {
+  <label>{{ message() }}</label>
+  }
+
+</div>

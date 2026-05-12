@@ -1,0 +1,37 @@
+<div class="search-med-container">
+  <h2>Search Medicines</h2>
+  <div class="search-form">
+    <input type="text" [(ngModel)]="searchName" placeholder="Enter medicine name" (keyup.enter)="onSearch()">
+    <button (click)="onSearch()">Search</button>
+  </div>
+
+  <div class="search-results" *ngIf="searchResults.length > 0">
+    <h3>Search Results:</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Brand</th>
+          <th>Name</th>
+          <th>Notes</th>
+          <th>Expiry Date</th>
+          <th>Quantity</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let med of searchResults">
+          <td>{{ med.brand }}</td>
+          <td>{{ med.name }}</td>
+          <td>{{ med.notes || '-' }}</td>
+          <td>{{ med.expiryDate | date:'shortDate' }}</td>
+          <td>{{ med.quantity }}</td>
+          <td>{{ med.price | currency }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="no-results" *ngIf="searchName && searchResults.length === 0">
+    <p>No medicines found matching "{{ searchName }}"</p>
+  </div>
+</div>

@@ -1,0 +1,43 @@
+
+<div class="med-list-container">
+<div class="search-form" *ngIf="medicinesList.length>0">
+    <input type="text" [(ngModel)]="searchName" placeholder="Enter medicine name" (keyup)="onSearch()">
+    <!-- <button (click)="onSearch()">Search</button> -->
+  </div>  
+    <div class="header">
+    
+    <h2>All Medicines</h2>
+    <button (click)="onAddNew()">Add New</button>
+    <button (click)="refresh()" [disabled]="loading()">Refresh</button>
+
+  </div>
+
+  <div *ngIf="loading()" class="loading">
+    Loading medicines...
+  </div>
+
+  <div *ngIf="!loading() && medicineSignal().length === 0" class="no-medicines">
+    No medicines found.
+  </div>
+
+  <table *ngIf="!loading() && medicineSignal().length > 0">
+    <thead>
+      <tr>
+        <th>Brand</th>
+        <th>Name</th>
+        <th>Expiry Date</th>
+        <th>Quantity</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let med of medicineSignal()" [ngClass]="getRowClass(med)">
+        <td>{{ med.brand }}</td>
+        <td>{{ med.name }}</td>
+        <td>{{ med.expiryDate | date:'shortDate' }}</td>
+        <td>{{ med.quantity }}</td>
+        <td>{{ med.price | currency }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

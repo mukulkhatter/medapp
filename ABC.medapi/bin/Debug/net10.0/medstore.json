@@ -1,0 +1,50 @@
+[
+  {
+    "Brand": "ABC",
+    "Name": "SOmeText",
+    "Notes": "fgdfg",
+    "ExpiryDate": "2026-05-12T00:00:00",
+    "Quantity": 5,
+    "Price": 0.05
+  },
+  {
+    "Brand": "Zydus",
+    "Name": "Zhandu",
+    "Notes": "hjhjhjh",
+    "ExpiryDate": "2026-07-23T00:00:00",
+    "Quantity": 60,
+    "Price": 20
+  },
+  {
+    "Brand": "SUn phrama",
+    "Name": "folvite",
+    "Notes": "jhkjhkjhkh",
+    "ExpiryDate": "2026-05-30T00:00:00",
+    "Quantity": 16,
+    "Price": 900
+  },
+  {
+    "Brand": "abbott",
+    "Name": "drug",
+    "Notes": "hjhkjh",
+    "ExpiryDate": "1998-02-20T00:00:00",
+    "Quantity": 40,
+    "Price": 98888
+  },
+  {
+    "Brand": "ABC",
+    "Name": "New Drug",
+    "Notes": "kjkj",
+    "ExpiryDate": "2026-05-21T00:00:00",
+    "Quantity": 30,
+    "Price": 9000
+  },
+  {
+    "Brand": "MyBrand",
+    "Name": "MyMed",
+    "Notes": "Some Notes",
+    "ExpiryDate": "2026-06-26T00:00:00",
+    "Quantity": 160,
+    "Price": 6767
+  }
+]

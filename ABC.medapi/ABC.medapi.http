@@ -1,0 +1,6 @@
+@ABC.medapi_HostAddress = http://localhost:5135
+
+GET {{ABC.medapi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

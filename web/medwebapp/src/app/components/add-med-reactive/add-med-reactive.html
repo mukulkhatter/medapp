@@ -1,0 +1,20 @@
+<div>
+    <form [formGroup]="medForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="name">{{title }} </label>
+            <br>
+            <input id="name" formControlName="name" class="form-control" />
+            <!-- <div *ngIf="medForm.get('name').invalid && medForm.get('name').touched" class="text-danger">
+                Medication name is required.
+            </div> -->
+        </div>
+        @if(!medForm.invalid)
+        {
+        <button type="submit" class="btn btn-primary">Submit</button>
+        }
+        @for(x of medForm.controls)
+        {
+<label>Test</label>
+        }
+    </form>
+</div>

@@ -26,6 +26,7 @@ function priceValidator(control: AbstractControl): ValidationErrors | null {
 @Component({
     selector: "app-add-med-reactive",
     templateUrl: "./add-med-reactive.html",
+    styleUrl: "./add-med-reactive.css",
     standalone: true,
     imports: [ReactiveFormsModule]
 })

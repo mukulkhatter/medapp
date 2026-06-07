@@ -1,20 +1,95 @@
-<div>
-    <form [formGroup]="medForm" (ngSubmit)="onSubmit()">
-        <div class="form-group">
-            <label for="name">{{title }} </label>
-            <br>
-            <input id="name" formControlName="name" class="form-control" />
-            <!-- <div *ngIf="medForm.get('name').invalid && medForm.get('name').touched" class="text-danger">
-                Medication name is required.
-            </div> -->
+<div class="add-med-container">
+  <h2>Add New Medicine (Reactive Form)</h2>
+  <form [formGroup]="medForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="brand">Brand:</label>
+      <input 
+        type="text" 
+        id="brand" 
+        formControlName="brand" 
+        class="form-control"
+        placeholder="Enter brand name"
+      />
+      @if(medForm.get('brand')?.invalid && medForm.get('brand')?.touched) {
+        <div class="error-message">Brand is required</div>
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input 
+        type="text" 
+        id="name" 
+        formControlName="name" 
+        class="form-control"
+        placeholder="Enter medicine name"
+      />
+      @if(medForm.get('name')?.invalid && medForm.get('name')?.touched) {
+        <div class="error-message">Medicine name is required</div>
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="notes">Notes:</label>
+      <textarea 
+        id="notes" 
+        formControlName="notes" 
+        class="form-control"
+        placeholder="Add notes (optional)"
+      ></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="expiryDate">Expiry Date:</label>
+      <input 
+        type="date" 
+        id="expiryDate" 
+        formControlName="expiryDate" 
+        class="form-control"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="quantity">Quantity:</label>
+      <input 
+        type="number" 
+        id="quantity" 
+        formControlName="quantity" 
+        class="form-control"
+        min="0"
+      />
+      @if(medForm.get('quantity')?.invalid && medForm.get('quantity')?.touched) {
+        <div class="error-message">Quantity is required</div>
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="price">Price:</label>
+      <input 
+        type="number" 
+        id="price" 
+        formControlName="price" 
+        class="form-control"
+        step="0.01"
+        min="0"
+      />
+      @if(medForm.get('price')?.invalid && medForm.get('price')?.touched) {
+        <div class="error-message">
+          @if(medForm.get('price')?.errors?.['required']) {
+            Price is required
+          } @else if(medForm.get('price')?.errors?.['invalidPrice']) {
+            Price must be greater than 0
+          }
         </div>
-        @if(!medForm.invalid)
-        {
-        <button type="submit" class="btn btn-primary">Submit</button>
-        }
-        @for(x of medForm.controls)
-        {
-<label>Test</label>
-        }
-    </form>
+      }
+    </div>
+
+    <button type="submit" [disabled]="medForm.invalid" class="btn btn-primary">
+      Add Medicine
+    </button>
+  </form>
+
+  @if(message().length > 0) {
+    <div class="message">{{ message() }}</div>
+  }
 </div>

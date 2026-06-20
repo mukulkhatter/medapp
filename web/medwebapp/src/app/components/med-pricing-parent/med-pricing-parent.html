@@ -1,0 +1,40 @@
+<div style="border: 1px solid blue; padding: 10px;">
+    <h1>Welcome to the Parent Component</h1>
+    <!-- Link to trigger the lazy loading of the child component -->
+   <p>
+    <button routerLink="med-pricing-child">
+        Load Med Child
+    </button>
+    </p>
+    <p>
+    <button (click)="goToChild()">
+        Go To child by Navigate
+    </button>
+    </p>
+    <p>
+    <button (click)="goToChildURL()">
+        Go To child by NavigateURL
+    </button>
+    </p>
+    <p>Status: {{ childMessage }}</p>
+    
+    <p><button (click)="updateDataOnChild()">Modify User values on Child</button></p>
+
+    <p><button (click)="changeUser()">Load Next User with Data Shared Service</button></p>
+
+
+    <p><input (input)="isDirty.set(true)" placeholder="Go to other component"/></p>
+
+    <a [routerLink]="['/medList']">Go on Med List Component</a>
+    
+    <!-- The Child Component will render inside this outlet -->
+     <!-- <router-outlet [messagefromParent]="parentMessage" 
+      [valuefromParent]="parentValue" ></router-outlet> -->
+
+
+<app-med-child [messagefromParent]="parentMessage" 
+      [valuefromParent]="parentValue" [datafromParent]="parentData" 
+      (onAlert)="handleChildAction($event)"
+      [userObj]="currentUser"></app-med-child>
+      </div>
+

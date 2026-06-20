@@ -1,0 +1,36 @@
+<div class="add-med-container">
+  <h2>Login</h2>
+  <form [formRoot]="userLoginForm">
+    <div class="form-group">
+      <label for="brand">Email:</label>
+      <input type="text" id="email" [formField]="userLoginForm.email">
+    </div>
+    @if(userLoginForm.email().invalid() && userLoginForm.email().touched()){
+        <div class="error-message">
+            @for (error of userLoginForm.email().errors(); track error.kind) {
+                <div>{{error.message}}</div>
+            }
+        </div>
+    }
+    <div class="form-group">
+      <label for="name">Password:</label>
+      <input type="text" id="password" [formField]="userLoginForm.password">
+    </div>
+    @if(userLoginForm.password().invalid() && userLoginForm.password().touched()){
+      <div class="error-message">
+          @for (error of userLoginForm.password().errors(); track error.kind) {
+              <div>{{error.message}}</div>
+          }
+      </div>
+    }
+
+    
+<button type="submit" [disabled]="userLoginForm().invalid() || userLoginForm().submitting()">
+  @if (userLoginForm().submitting()) {
+    Loging...
+  } @else {
+    Login
+  }
+</button>
+</form>
+</div>

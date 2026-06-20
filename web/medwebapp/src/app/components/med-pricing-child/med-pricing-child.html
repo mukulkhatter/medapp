@@ -1,0 +1,27 @@
+<div style="border: 1px solid blue; padding: 10px;">
+      <h3>This is the Child Component Content</h3>
+      <!-- Read the signal values by calling them as functions () -->
+      <p>Message from Parent: {{ messagefromParent() }}</p>
+      <p>Value from Parent: {{ valuefromParent() }}</p>
+      <p>Data from Parent: {{ datafromParent }}</p>
+
+      <div style="border: 1px solid green; padding: 10px;">
+      <p>
+      <button (click)="notifyParent()">Send Alert to Parent</button>
+      </p>
+    </div>
+
+    <div>
+        <!-- Displaying User Data from Parent-->
+      <p><strong>User profile:</strong></p>
+        <p>Name: {{ userObj()?.name }}</p> 
+        <p>ID: {{ userObj()?.id }}</p>
+    </div>
+
+    <div>
+      <!-- Automatically reads and refreshes layout when parent fires updates -->
+      <p><strong>User Data By Data Shared Service:</strong></p>
+      <p>UserNAme: {{ userProfile().name }} </p>
+      <p>ID: {{ userProfile().userId }}</p>
+    </div>
+    </div>

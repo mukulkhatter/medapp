@@ -1,0 +1,89 @@
+<div class="add-med-container">
+  <h2>Add New Medicine</h2>
+  <form [formRoot]="medItemForm">
+    <div class="form-group">
+      <label for="brand">Brand:</label>
+      <input type="text" id="brand" [formField]="medItemForm.brand">
+    </div>
+    @if(medItemForm.brand().invalid() && medItemForm.brand().touched()){
+        <div class="error-message">
+            @for (error of medItemForm.brand().errors(); track error.kind) {
+                <div>{{error.message}}</div>
+            }
+        </div>
+    }
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input type="text" id="name" [formField]="medItemForm.name">
+    </div>
+    @if(medItemForm.name().invalid() && medItemForm.name().touched()){
+      <div class="error-message">
+          @for (error of medItemForm.name().errors(); track error.kind) {
+              <div>{{error.message}}</div>
+          }
+      </div>
+    }
+
+    <div class="form-group">
+      <label for="notes">Notes:</label>
+      <textarea id="notes" [formField]="medItemForm.notes"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="expiryDate">Expiry Date:</label>
+      <input type="date" id="expiryDate" [formField]="medItemForm.expiryDate">
+    </div>
+    @if(medItemForm.expiryDate().invalid() && medItemForm.expiryDate().touched()){
+      <div class="error-message">
+          @for (error of medItemForm.expiryDate().errors(); track error.kind) {
+              <div>{{error.message}}</div>
+          }
+      </div>
+    }
+    <div class="form-group">
+      <label for="quantity">Quantity:</label>
+      <input type="number" id="quantity" [formField]="medItemForm.quantity">
+    </div>
+    @if(medItemForm.quantity().invalid() && medItemForm.quantity().touched()){
+      <div class="error-message">
+          @for (error of medItemForm.quantity().errors(); track error.kind) {
+              <div>{{error.message}}</div>
+          }
+      </div>
+    }
+
+    <div class="form-group">
+      <label for="price">Price:</label>
+      <input type="number" id="price" [formField]="medItemForm.price" step="0.01" >
+    </div>
+    @if(medItemForm.price().invalid() && medItemForm.price().touched()){
+      <div class="error-message">
+          @for (error of medItemForm.price().errors(); track error.kind) {
+              <div>{{error.message}}</div>
+          }
+      </div>
+    }
+
+    <!-- <div class="form-group">
+      <label for="brand">Email:</label>
+      <input type="text" id="brand" [formField]="medItemForm.email">
+    </div>
+    @if(medItemForm.email().invalid() && medItemForm.email().touched()){
+        <div class="error-message">
+            @for (error of medItemForm.email().errors(); track error.kind) {
+                <div>{{error.message}}</div>
+            }
+        </div>
+    } -->
+<button type="submit" [disabled]="medItemForm().invalid() || medItemForm().submitting()">
+  @if (medItemForm().submitting()) {
+    Sending...
+  } @else {
+    Send
+  }
+</button>
+</form>
+ @if(message().length > 0) {
+    <div class="message">{{ message() }}</div>
+  }
+</div>

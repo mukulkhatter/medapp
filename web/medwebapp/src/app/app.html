@@ -1,8 +1,26 @@
 <div class="app-container">
   <header class="app-header">
-    <h1>{{ title() }}</h1>
+    <div class="header-content">
+      <h1>{{ title() }}</h1>
+      <div class="auth-section">
+        <div *ngIf="(isLoggedIn$ | async) as isLoggedIn">
+          <div *ngIf="isLoggedIn; then loggedInTemplate else loggedOutTemplate"></div>
+          <ng-template #loggedInTemplate>
+            <div class="user-info">
+              <span *ngIf="(currentUser$ | async) as user" class="user-name">
+                Welcome, {{ user?.name || 'User' }}!
+              </span>
+              <button (click)="onLogout()" class="logout-btn">Logout</button>
+            </div>
+          </ng-template>
+          <ng-template #loggedOutTemplate>
+            <button (click)="onLogin()" class="login-btn">Login</button>
+          </ng-template>
+        </div>
+      </div>
+    </div>
   </header>
 
-<router-outlet /> 
+  <router-outlet /> 
 </div>
 

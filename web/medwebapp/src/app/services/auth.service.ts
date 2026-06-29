@@ -5,9 +5,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { filter, switchMap, take } from 'rxjs/operators';
 import { apiScopes } from '../msal.config';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({providedIn: 'root'})
 export class AuthService {
   private msalService = inject(MsalService);
 
@@ -58,7 +56,7 @@ export class AuthService {
    */
   login(): void {
     this.whenMsalReady(() => this.msalService.loginRedirect({
-      scopes: ['User.Read'],
+      scopes: apiScopes.scopes,
       prompt: 'select_account'
     })).subscribe({
       error: (error) => {

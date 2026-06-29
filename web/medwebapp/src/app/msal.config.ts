@@ -6,7 +6,7 @@ import { Configuration, LogLevel, InteractionType } from '@azure/msal-browser';
  */
 export const msalConfig: Configuration = {
   auth: {
-    clientId: 'e3b8d638-37e5-4d60-81fd-aa49f114e18a', // Replace with your Application (client) ID
+    clientId: '484b195a-ac59-4931-a072-6c5f7d4105d3', // Replace with your Application (client) ID
     authority: 'https://login.microsoftonline.com/a49897fd-9431-436d-a481-f002d4ae575e', // Replace YOUR_TENANT_ID with your Directory (tenant) ID
     redirectUri: 'http://localhost:4200', // Redirect URI registered in Azure AD
     postLogoutRedirectUri: 'http://localhost:4200',
@@ -31,11 +31,13 @@ export const msalConfig: Configuration = {
  * Scopes for API calls
  * Update the scopes based on your API configuration
  */
+const apiResourceUri = 'api://0813203e-1567-42c1-8992-8c5ba448abae';
+
 export const loginRequest = {
-  scopes: ['User.Read'],
+  scopes: [`${apiResourceUri}/Scope.Read`],
   prompt: 'select_account'
 };
 
 export const apiScopes = {
-  scopes: ['api://e3b8d638-37e5-4d60-81fd-aa49f114e18a/MedAPIScope'], // Replace with your API scopes
+  scopes: [`${apiResourceUri}/Scope.Read`], // Replace with your API scopes
 };

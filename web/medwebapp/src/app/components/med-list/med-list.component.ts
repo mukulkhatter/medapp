@@ -37,10 +37,25 @@ export class MedListComponent implements OnInit {
 
   loadMedicines() {
     this.loading.set(true);
-    this.http.get<MedItem[]>('http://localhost:5001/api/Med').subscribe({
+    this.http.get<MedItem[]>('https://localhost:7182/api/Med').subscribe({
       next: (medicines) => {
         this.medicinesList = medicines;
         this.medicineSignal.set(medicines);
+        this.loading.set(false);
+        //this.getMedicineByName();
+      },
+      error: (error) => {
+        //console.error('Error loading medicines', error);
+        this.loading.set(false);
+        this.medicineSignal.set([]);
+      }
+    });
+  }
+
+  getMedicineByName() {
+    this.http.get<MedItem>('https://localhost:7182/api/Med/search/drug').subscribe({
+      next: (medicines) => {
+      
         this.loading.set(false);
       },
       error: (error) => {

@@ -11,9 +11,9 @@ export const msalInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, ne
   const authService = inject(AuthService);
 
   // Skip token attachment for non-API requests
-  if (!shouldAttachToken(req)) {
-    return next(req);
-  }
+  // if (!shouldAttachToken(req)) {
+  //   return next(req);
+  // }
 
   // Get token from common auth service method
   return authService.getToken().pipe(
@@ -37,6 +37,6 @@ export const msalInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, ne
  */
 function shouldAttachToken(req: HttpRequest<any>): boolean {
   // Attach token only to your API requests
-  const apiUrl = 'http://localhost:5000'; // Update with your API URL
+  const apiUrl = 'http://localhost:5001'; // Update with your API URL
   return req.url.startsWith(apiUrl);
 }

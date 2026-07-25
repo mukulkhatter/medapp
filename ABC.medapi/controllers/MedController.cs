@@ -10,7 +10,7 @@ namespace ABC.medapi.Controllers
 {
     
     [ApiController]
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     public class MedController : ControllerBase
     {
@@ -18,13 +18,15 @@ namespace ABC.medapi.Controllers
         private readonly IServiceC _serviceC;
         private readonly IServiceA _serviceA;
         private readonly IServiceB _serviceB;
+        private readonly IBlobService _blobService; // Custom wrapper writtem
 
-        public MedController(IMedStoreService storeService, IServiceC serviceC, IServiceA serviceA, IServiceB serviceB)
+        public MedController(IMedStoreService storeService, IServiceC serviceC, IServiceA serviceA, IServiceB serviceB, IBlobService blobService)
         {
             _storeService = storeService;
             _serviceC = serviceC;
             _serviceA = serviceA;
             _serviceB = serviceB;
+            _blobService= blobService;
 
         }
 
@@ -51,6 +53,16 @@ namespace ABC.medapi.Controllers
 
             return Ok(_storeService.SearchByName(name));
         }
+
+        [HttpGet("azureFeatureDemo")]
+        public ActionResult<IEnumerable<MedItem>> AzureFeatureDemo()
+        {
+            // Method Demo's Blob and Cache Service
+            _blobService.GetBlob("");
+
+            return Ok();
+        }
+
 
         [HttpPost]
         public ActionResult<MedItem> AddMed([FromBody] MedItem newMed)

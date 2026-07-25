@@ -1,3 +1,5 @@
+using ABC.medapi.Services;
+using ABC.medapi.Services.Interface;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Identity.Web;
 using Microsoft.OpenApi;
@@ -41,10 +43,29 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 builder.Services.AddAuthorization();
 
 builder.Services.AddControllers();
-builder.Services.AddSingleton<ABC.medapi.Services.IMedStoreService, ABC.medapi.Services.MedStoreService>();
-builder.Services.AddTransient<ABC.medapi.Services.Interface.IServiceA, ABC.medapi.Services.ServiceA>();
-builder.Services.AddTransient<ABC.medapi.Services.Interface.IServiceB, ABC.medapi.Services.ServiceB>();
-builder.Services.AddSingleton<ABC.medapi.Services.Interface.IServiceC, ABC.medapi.Services.ServiceC>();
+builder.Services.AddSingleton<IMedStoreService, ABC.medapi.Services.MedStoreService>();
+builder.Services.AddTransient<IServiceA, ABC.medapi.Services.ServiceA>();
+builder.Services.AddTransient<IServiceB, ABC.medapi.Services.ServiceB>();
+builder.Services.AddSingleton<IServiceC, ABC.medapi.Services.ServiceC>();
+
+// Adding BlobService Wrapper
+builder.Services.AddScoped<IBlobService, BlobService>();
+builder.Services.AddSingleton<Azure.Storage.Blobs.BlobServiceClient>(sp =>
+{
+    var connectionString = builder.Configuration.GetConnectionString("BlobStorageConnectionString");
+    return new Azure.Storage.Blobs.BlobServiceClient(connectionString);
+});
+
+// Redis Registeration and initialization
+
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+
+    options.Configuration = builder.Configuration.GetConnectionString("Redis");
+    options.InstanceName = "forredisolddemo.redis";
+});
+
+
 
 builder.Services.AddCors(o=>o.AddPolicy("AllowAll", policy =>
 {
